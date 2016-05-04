@@ -9,13 +9,14 @@ function constructJson(jsonKey, jsonValue){
    let jsonKeyArr = jsonKey.split('.');
    let currentValue = jsonObj;
 
-   for(let i = 0; i < jsonKeyArr.length;i++){
-       if(currentValue[jsonKeyArr[i]]===undefined){
+   for(let i = 0; i < jsonKeyArr.length; i++){
+       if (currentValue[jsonKeyArr[i]] === undefined){
           currentValue[jsonKeyArr[i]] = {};
        }
-       if(i < jsonKeyArr.length-1){
+
+       if (i < jsonKeyArr.length - 1){
        currentValue =  currentValue[jsonKeyArr[i]];
-       }else{
+       } else {
             currentValue[jsonKeyArr[i]] = jsonValue;
        }
    }
