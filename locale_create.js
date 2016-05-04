@@ -5,7 +5,6 @@ let keyToAdd = process.argv[3];
 let valToAdd = process.argv[4];
 
 function constructJson(jsonKey, jsonValue){
-    //REWRITE!!!!!!!!
    let jsonObj = langFile;
    let jsonKeyArr = jsonKey.split('.');
    let currentValue = jsonObj;
