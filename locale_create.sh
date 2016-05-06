@@ -102,7 +102,7 @@ else
 
                         todo="$i text"
 
-                        node locale_create.js $f $i $todo
+                        node locale_create.js $f $i "$todo"
                     fi
                 fi
             done
@@ -111,7 +111,7 @@ else
 
             if [[ $oldsize == $newsize ]]
             then
-                echo -e "\033[31mKey(s) not added or an error has occurred.\n"
+                echo -e "\033[31mKey(s) not added or an error has occurred. (or maybe nothing to add?)\n"
             else
                 echo -e "\033[32mKey(s) added.\n"
             fi

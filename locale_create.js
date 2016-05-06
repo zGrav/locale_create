@@ -71,6 +71,7 @@ if (keyToAdd != null) {
     grabFiles('../../embedded', filelist)
 
     let extKeysFromFiles = [];
+    let splitKeyArray = []
 
     for (let i = 0; i < filelist.length; i++) {
         fs.readFile(filelist[i], 'utf8', function(err, data) {
@@ -199,6 +200,32 @@ if (keyToAdd != null) {
                             extstr = extstr.replace("this.context.('", '')
                             extstr = extstr.replace("')", '')
                             extstr = extstr.replace("('", '')
+                            extstr = extstr.replace("'", '')
+
+                            splitKeyArray.push(extstr)
+                        }
+
+                        for (let q = 0; q < splitKeyArray.length; q++) {
+                            if (splitKeyArray[q].startsWith('\n')) {
+                                splitKeyArray[q] = splitKeyArray[q].slice(1, splitKeyArray[q].length)
+                            } else if (splitKeyArray[q].startsWith('\n\n')) {
+                                splitKeyArray[q] = splitKeyArray[q].slice(3, splitKeyArray[q].length)
+                            }
+
+                            if (splitKeyArray[q].indexOf('\n') > -1) {
+                                let replacearr = splitKeyArray[q].split('\n');
+                                splitKeyArray.splice(q, 1)
+
+                                for (let i = 0; i < replacearr.length; i++) {
+                                    if (replacearr[i] !== '') {
+                                        splitKeyArray.push(replacearr[i])
+                                    }
+                                }
+                            }
+
+                            if (searchArray(splitKeyArray[q], extKeysFromFiles) === false) {
+                                extKeysFromFiles.push(splitKeyArray[q])
+                            }
                         }
 
                         //REWRITE!!!!!!!!
